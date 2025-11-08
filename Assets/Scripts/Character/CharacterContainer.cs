@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 public class CharacterContainer : MonoBehaviour
 {
@@ -15,6 +16,18 @@ public class CharacterContainer : MonoBehaviour
    {
       _characters.Add(character);
    }
+   
+   public void ClearAllCharacters()
+   {
+      foreach (var character in _characters.ToList())
+      {
+         if (character != null)
+         {
+            Destroy(character.gameObject);
+         }
+      }
+      _characters.Clear();
+   }
 
    public void UnregisterCharacter(CharacterCore character)
    {
@@ -23,5 +36,10 @@ public class CharacterContainer : MonoBehaviour
          return;
       }
       _characters.Remove(character);
+   }
+
+   private void OnDestroy()
+   {
+      ClearAllCharacters();
    }
 }

@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class CharacterCore : MonoBehaviour
 {
+   [field: SerializeField] public Animator Animator { get; private set; }
    [field: SerializeField] public NavMeshSettings NavMeshSettings { get; set; }
    [field: SerializeField] public Customizer Customizer { get; set; }
    
@@ -13,8 +15,11 @@ public class CharacterCore : MonoBehaviour
    
    private float _currentPointSpawnInterval;
    private float _timer;
+   private float _normalizedSpeed;
    private Vector3 _rotationDirection;
    private const float ErrorOffset = 0.1f;
+   
+   private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
 
    [Inject]
    private void Construct(CharacterContainer characterContainer)
@@ -36,6 +41,8 @@ public class CharacterCore : MonoBehaviour
       UpdateVelocity();
       Rotate();
       
+      UpdateAnimatorMoveSpeed();
+      
       _timer += Time.deltaTime;
       
       if (_timer < _currentPointSpawnInterval)
@@ -46,6 +53,13 @@ public class CharacterCore : MonoBehaviour
       _timer = 0f;
       _currentPointSpawnInterval = UpdatePointSpawnInterval();
       UpdateNewNavmeshWalkablePoint();
+   }
+   
+   private void UpdateAnimatorMoveSpeed()
+   {
+      _normalizedSpeed = Mathf.Clamp01(NavMeshSettings.Agent.velocity.magnitude / NavMeshSettings.Agent.speed);
+
+      Animator.SetFloat(_moveSpeedHash, _normalizedSpeed);
    }
 
    private float UpdatePointSpawnInterval()
@@ -85,6 +99,11 @@ public class CharacterCore : MonoBehaviour
       if (!NavMeshSettings.Agent.hasPath) { return; }
       NavMeshSettings.Agent.acceleration = (NavMeshSettings.Agent.remainingDistance < NavMeshSettings.CloseEnoughMeters)
          ? NavMeshSettings.Deceleration : NavMeshSettings.Acceleration;
+   }
+
+   private void OnDestroy()
+   {
+      _characterContainer.UnregisterCharacter(this);
    }
 }
 

@@ -79,3 +79,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneInstaller
   interfacePrefab: {fileID: 4026345449274928034, guid: bbe9e7ce222ff6e4a97a87159505ff2d, type: 3}
   characterContainer: {fileID: 7546543549317282048, guid: 0e2c4ab5ab212eb4880ff69c41913caa, type: 3}
+  characterSpawner: {fileID: 2679357687403099469, guid: 99ac1d0e401d12743a22eb4a69fcb084, type: 3}
+  sceneCamera: {fileID: 8485402870579912859, guid: cf7efce23ddab1549baa5d970daf8e5e, type: 3}
