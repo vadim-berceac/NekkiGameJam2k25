@@ -13463,9 +13463,11 @@ GameObject:
   m_Component:
   - component: {fileID: 498442}
   - component: {fileID: 9562372}
+  - component: {fileID: 3869200042016569782}
   - component: {fileID: 8329078726194341770}
   - component: {fileID: 8169617139367061080}
-  m_Layer: 0
+  - component: {fileID: 3258220110391024766}
+  m_Layer: 10
   m_Name: BaseCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13559,7 +13561,7 @@ Animator:
   m_GameObject: {fileID: 169662}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 02ded044b8e0963439276550f50be6f9, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f83287cfe71ed3148bf68c46928d0287, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -13571,6 +13573,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &3869200042016569782
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169662}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 54
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &8329078726194341770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13809,7 +13834,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01edb2db026d68147a6df539b9057c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCore
+  <NavMeshSettings>k__BackingField:
+    <Agent>k__BackingField: {fileID: 3258220110391024766}
+    <RandomNavMeshPointRadius>k__BackingField: 8
+    <MinPointSpawnInterval>k__BackingField: 0
+    <MaxPointSpawnInterval>k__BackingField: 12
+    <Acceleration>k__BackingField: 2
+    <Deceleration>k__BackingField: 60
+    <CloseEnoughMeters>k__BackingField: 1
   <Customizer>k__BackingField: {fileID: 8329078726194341770}
+--- !u!195 &3258220110391024766
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169662}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 0
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 2
 --- !u!1 &170510
 GameObject:
   m_ObjectHideFlags: 0
