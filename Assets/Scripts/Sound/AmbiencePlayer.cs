@@ -39,11 +39,15 @@ public class AmbiencePlayer : MonoBehaviour
 
     private void Update()
     {
-        if (!_activeMusicSource.isPlaying)
+        if (_activeMusicSource.clip != null)
         {
-            PlayRandomMusic();
+            if (_activeMusicSource.time >= _activeMusicSource.clip.length - 0.1f)
+            {
+                PlayRandomMusic();
+            }
         }
     }
+
 
     private void PlayRandomMusic()
     {
