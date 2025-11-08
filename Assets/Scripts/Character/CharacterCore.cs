@@ -32,7 +32,7 @@ public class CharacterCore : MonoBehaviour
       
       _characterContainer.RegisterCharacter(this);
 
-      _currentPointSpawnInterval = UpdatePointSpawnInterval();
+      _currentPointSpawnInterval = 0;
    }
    
    private void Update()

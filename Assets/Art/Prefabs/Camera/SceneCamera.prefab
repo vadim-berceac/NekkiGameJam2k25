@@ -203,5 +203,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e68c4a58653504e419459b6f9caf33f3, type: 3}
   - {fileID: 8300000, guid: 34e46bacef40cae4d9f5e41c11c85636, type: 3}
   <AmbientSound>k__BackingField: {fileID: 8300000, guid: ffdc8851731d55f42a4004cee1588d94, type: 3}
-  <CrossfadeDuration>k__BackingField: 2
-  <TargetVolume>k__BackingField: 0.08
+  <CrossFadeDuration>k__BackingField: 2
+  <TargetVolume>k__BackingField: 0.1

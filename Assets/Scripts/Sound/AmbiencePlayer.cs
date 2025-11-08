@@ -21,7 +21,7 @@ public class AmbiencePlayer : MonoBehaviour
 
         _soundSource.clip = AmbientSound;
         _soundSource.loop = true;
-        _soundSource.playOnAwake = false;
+        _soundSource.playOnAwake = true;
 
         _musicSourceA.loop = false;
         _musicSourceB.loop = false;
@@ -56,9 +56,7 @@ public class AmbiencePlayer : MonoBehaviour
         nextSource.clip = randomClip;
         nextSource.volume = 0f;
         nextSource.Play();
-        
-        var normalizedVolume = NormalizeClipVolume(randomClip, TargetVolume);
-        StartCoroutine(CrossFade(_activeMusicSource, nextSource, normalizedVolume));
+        StartCoroutine(CrossFade(_activeMusicSource, nextSource, TargetVolume));
 
         _activeMusicSource = nextSource;
     }
@@ -79,26 +77,5 @@ public class AmbiencePlayer : MonoBehaviour
 
         from.Stop();
         to.volume = targetVol;
-    }
-
-    private static float NormalizeClipVolume(AudioClip clip, float targetVol)
-    {
-        if (clip == null) return targetVol;
-
-        var samples = new float[clip.samples * clip.channels];
-        clip.GetData(samples, 0);
-
-        var sum = 0f;
-
-        foreach (var sample in samples)
-        {
-            sum += Mathf.Abs(sample);
-        }
-
-        var avg = sum / samples.Length;
-        if (avg <= 0.0001f) return targetVol;
-        
-        var gain = targetVol / avg;
-        return Mathf.Clamp(gain * targetVol, 0f, 1f);
     }
 }
