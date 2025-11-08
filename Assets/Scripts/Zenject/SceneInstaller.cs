@@ -13,5 +13,6 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<CharacterContainer>().FromComponentInNewPrefab(characterContainer).AsSingle().NonLazy();
         Container.Bind<CharacterSpawner>().FromComponentInNewPrefab(characterSpawner).AsSingle().NonLazy();
         Container.Bind<SceneCamera>().FromComponentInNewPrefab(sceneCamera).AsSingle().NonLazy();
+        Container.Bind<PlayerMovement>().FromComponentInHierarchy().AsSingle().NonLazy();
     }
 }

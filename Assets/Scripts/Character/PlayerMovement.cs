@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [field: SerializeField] public PlayerMovementSettings PlayerMovementSettings { get; set; }
-    
+    [field: SerializeField] public Transform CameraTarget { get; set; }
     private Vector2 _moveInput;
     private Vector3 _lastPosition;
     private InputAction _moveAction;
@@ -50,18 +50,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateDirection()
     {
-        var direction = new Vector3(_moveInput.x, 0, _moveInput.y);
+        var inputDirection = new Vector3(_moveInput.x, 0, _moveInput.y);
 
-        if (direction.sqrMagnitude <= 0.01f)
+        if (inputDirection.sqrMagnitude <= 0.01f)
         {
             return;
         }
-        
-        var targetPos = transform.position +  PlayerMovementSettings.Agent.speed * Time.deltaTime * direction.normalized;
+
+        var cameraYaw = CameraTarget.eulerAngles.y;
+        var rotation = Quaternion.Euler(0, cameraYaw, 0);
+
+        var worldDirection = rotation * inputDirection.normalized;
+
+        var targetPos = transform.position + PlayerMovementSettings.Agent.speed * Time.deltaTime * worldDirection;
 
         if (NavMesh.SamplePosition(targetPos, out var hit, 0.5f, NavMesh.AllAreas))
         {
             PlayerMovementSettings.Agent.Move(hit.position - transform.position);
+
+            transform.rotation = Quaternion.Euler(0, cameraYaw, 0);
         }
     }
     
