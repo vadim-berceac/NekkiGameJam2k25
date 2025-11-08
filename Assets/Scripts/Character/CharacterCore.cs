@@ -5,7 +5,9 @@ using Random = UnityEngine.Random;
 
 public class CharacterCore : MonoBehaviour
 {
+   [field: SerializeField] public Collider Collider { get; private set; }
    [field: SerializeField] public Animator Animator { get; private set; }
+   [field: SerializeField] public GameObject TestEmission { get; private set; }
    [field: SerializeField] public NavMeshSettings NavMeshSettings { get; set; }
    [field: SerializeField] public Customizer Customizer { get; set; }
    
@@ -90,6 +92,10 @@ public class CharacterCore : MonoBehaviour
    
    private void Rotate()
    {
+      if (_rotationDirection == Vector3.zero)
+      {
+         return;
+      }
       var lookRotation = Quaternion.LookRotation(new Vector3(_rotationDirection.x, 0, _rotationDirection.z));
       CharacterTransform.rotation = Quaternion.Slerp(CharacterTransform.rotation, lookRotation, Time.deltaTime * 3);
    }

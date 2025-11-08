@@ -31,6 +31,8 @@ public class CharacterSpawner : MonoBehaviour
             _characterContainer.ClearAllCharacters();
         }
         
+        _characterContainer.SetMaxCharacterCount(spawnCount);
+        
         for (var i = 0; i < spawnCount; i++)
         {
             var spawnPos = GetRandomPointOnNavMesh(transform.position, spawnRadius);
