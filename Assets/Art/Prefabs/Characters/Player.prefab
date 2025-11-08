@@ -192,8 +192,33 @@ PrefabInstance:
     - {fileID: 8169617139367061080, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 169662, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2914532914731981906}
   m_SourcePrefab: {fileID: 100100000, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
+--- !u!1 &452752366711307951 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 169662, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
+  m_PrefabInstance: {fileID: 452752366711203857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2914532914731981906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452752366711307951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b70306657b2e5e4da1f165c92cf122b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  <PlayerMovementSettings>k__BackingField:
+    <Animator>k__BackingField: {fileID: 452752366720516373}
+    <Agent>k__BackingField: {fileID: 3134498801611306095}
+    <ActionAsset>k__BackingField: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    <SmoothTime>k__BackingField: 0.2
 --- !u!23 &452752366713328217 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2341448, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
@@ -217,5 +242,15 @@ MeshRenderer:
 --- !u!23 &452752366713564755 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2360898, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
+  m_PrefabInstance: {fileID: 452752366711203857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &452752366720516373 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9562372, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
+  m_PrefabInstance: {fileID: 452752366711203857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &3134498801611306095 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 3258220110391024766, guid: 7fa6297e627b25c4eb562843f29c6a57, type: 3}
   m_PrefabInstance: {fileID: 452752366711203857}
   m_PrefabAsset: {fileID: 0}
