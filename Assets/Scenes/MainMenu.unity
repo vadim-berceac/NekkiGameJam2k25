@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd59d2381a1187a4583b84190370ca31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Loader
-  <SceneToLoad0>k__BackingField: GeneratorScene
+  <SceneToLoad0>k__BackingField: Town
 --- !u!1 &547989612
 GameObject:
   m_ObjectHideFlags: 0
