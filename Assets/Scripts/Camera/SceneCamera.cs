@@ -63,6 +63,7 @@ public class SceneCamera : MonoBehaviour
    
    private void CameraRotation()
    {
+       if (EndWindow.GameEnded) return;
        if (_playerTransform == null) return;
        if (_playerLook.sqrMagnitude >= Threshold)
        {

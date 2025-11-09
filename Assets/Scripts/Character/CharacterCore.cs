@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class CharacterCore : MonoBehaviour
 {
+   [field: SerializeField] public AudioClip OuchSound { get; set; }
    [field: SerializeField] public Transform PortraitCameraTransform { get; set; }
    [field: SerializeField] public Collider Collider { get; private set; }
    [field: SerializeField] public Animator Animator { get; private set; }
@@ -45,12 +46,14 @@ public class CharacterCore : MonoBehaviour
    {
       _onAction = true;
       Animator.SetTrigger(_failureHash);
+      AudioSource.PlayClipAtPoint(OuchSound, Camera.main.transform.position);
    }
 
    public void OnSuccess()
    {
       _onAction = true;
       Animator.SetTrigger(_successHash);
+      AudioSource.PlayClipAtPoint(OuchSound, Camera.main.transform.position);
    }
 
    public void OnAnimationEnd()

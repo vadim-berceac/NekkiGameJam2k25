@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     private float _currentSeconds;
     private const string TimeFormat = "{0:00}:{1:00}";
     public static Action OnTimerEnd;
+    public static Action OnWin;
     private bool _isTimerEnd;
 
     private void Start()
@@ -53,6 +54,8 @@ public class Timer : MonoBehaviour
 
     private void OnVictory()
     {
+        OnWin?.Invoke();
+        _isTimerEnd = true;
         Debug.Log("Victory!");
     }
 

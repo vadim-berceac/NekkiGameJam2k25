@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _interactAction;
     private float _normalizedSpeed;
-    private float _smoothedSpeed; 
+    private float _smoothedSpeed = 0; 
     private bool _onAction;
     private const float CheckSphereRadius = 2f;
     private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _lastPosition = transform.position;
+        PlayerMovementSettings.Animator.SetFloat(_moveSpeedHash, _smoothedSpeed);
     }
     
     public void OnAnimationEnd()
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveAction.performed -= OnMovePerformed;
         _moveAction.canceled -= OnMoveCanceled;
-        _interactAction.performed -= OnInteract;
+        _interactAction.started -= OnInteract;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)

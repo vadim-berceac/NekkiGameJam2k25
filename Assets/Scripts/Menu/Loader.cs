@@ -5,6 +5,7 @@ using System.Collections;
 public class Loader : MonoBehaviour
 {
     [field: SerializeField] public string SceneToLoad0 { get; set; }
+    [field: SerializeField] public string SceneToLoad1 { get; set; }
 
     private Coroutine _loadingCoroutine;
     private AsyncOperation _asyncLoad;
@@ -24,6 +25,23 @@ public class Loader : MonoBehaviour
         }
 
         _loadingCoroutine = StartCoroutine(LoadYourAsyncScene(SceneToLoad0));
+    }
+    
+    public void LoadScene1()
+    {
+        if (string.IsNullOrEmpty(SceneToLoad0))
+        {
+            Debug.LogError("SceneToLoad0 is not set!");
+            return;
+        }
+        
+        if (_loadingCoroutine != null)
+        {
+            Debug.LogWarning("Scene loading already in progress!");
+            return;
+        }
+
+        _loadingCoroutine = StartCoroutine(LoadYourAsyncScene(SceneToLoad1));
     }
 
     private IEnumerator LoadYourAsyncScene(string sceneName)
