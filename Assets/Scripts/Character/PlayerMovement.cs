@@ -167,14 +167,25 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimatorMoveSpeed()
     {
         var displacement = transform.position - _lastPosition;
+        if (Time.deltaTime <= Mathf.Epsilon)
+        {
+            return;
+        }
+
         var currentSpeed = displacement.magnitude / Time.deltaTime;
 
         var targetNormalizedSpeed = Mathf.Clamp01(currentSpeed / PlayerMovementSettings.Agent.speed);
-       
+
         _smoothedSpeed = Mathf.Lerp(_smoothedSpeed, targetNormalizedSpeed, PlayerMovementSettings.SmoothTime);
+
+        if (float.IsNaN(_smoothedSpeed) || float.IsInfinity(_smoothedSpeed))
+        {
+            _smoothedSpeed = 0f;
+        }
 
         PlayerMovementSettings.Animator.SetFloat(_moveSpeedHash, _smoothedSpeed);
     }
+
 }
 
 [System.Serializable]

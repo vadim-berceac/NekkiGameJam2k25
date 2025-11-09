@@ -4,11 +4,17 @@ using System.Collections;
 
 public class Loader : MonoBehaviour
 {
+    [field: SerializeField] public AudioClip ClickSound { get; set; }
     [field: SerializeField] public string SceneToLoad0 { get; set; }
     [field: SerializeField] public string SceneToLoad1 { get; set; }
 
     private Coroutine _loadingCoroutine;
     private AsyncOperation _asyncLoad;
+
+    public void ClicSoundPlay()
+    {
+        AudioSource.PlayClipAtPoint(ClickSound, Camera.main.transform.position);
+    }
 
     public void LoadScene0()
     {

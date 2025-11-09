@@ -5,6 +5,8 @@ public class EndWindow : MonoBehaviour
     [field: SerializeField] private GameObject EndWindowCanvas { get; set; }
     [field: SerializeField] private GameObject LoseCanvas { get; set; }
     [field: SerializeField] private GameObject WinCanvas { get; set; }
+    [field: SerializeField] private AudioClip Lose { get; set; }
+    [field: SerializeField] private AudioClip Win { get; set; }
 
     private const float PauseDelay = 3f;
     private bool _endGame;
@@ -39,6 +41,7 @@ public class EndWindow : MonoBehaviour
     {
         EndWindowCanvas.SetActive(true);
         LoseCanvas.SetActive(true);
+        AudioSource.PlayClipAtPoint(Lose, Camera.main.transform.position);
         _endGame = true;
         _pauseTimer = 0f;
     }
@@ -47,6 +50,7 @@ public class EndWindow : MonoBehaviour
     {
         EndWindowCanvas.SetActive(true);
         WinCanvas.SetActive(true);
+        AudioSource.PlayClipAtPoint(Win, Camera.main.transform.position);
         _endGame = true;
         _pauseTimer = 0f;
     }
