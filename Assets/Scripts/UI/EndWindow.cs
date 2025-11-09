@@ -44,6 +44,7 @@ public class EndWindow : MonoBehaviour
         AudioSource.PlayClipAtPoint(Lose, Camera.main.transform.position);
         _endGame = true;
         _pauseTimer = 0f;
+        EnableCursor();
     }
 
     private void OnWin()
@@ -53,6 +54,13 @@ public class EndWindow : MonoBehaviour
         AudioSource.PlayClipAtPoint(Win, Camera.main.transform.position);
         _endGame = true;
         _pauseTimer = 0f;
+        EnableCursor();
+    }
+
+    private void EnableCursor()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     private void OnDisable()

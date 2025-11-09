@@ -31,6 +31,8 @@ public class SceneCamera : MonoBehaviour
        _cameraTransform.rotation = Settings.StartRotation;
        VirtualCamera.Follow = _playerTransform;
        VirtualCamera.LookAt = _playerTransform;
+       Cursor.lockState = CursorLockMode.Locked;
+       Cursor.visible = false;
    }
 
    private void OnEnable()
