@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class CharacterCore : MonoBehaviour
 {
+   [field: SerializeField] public Transform PortraitCameraTransform { get; set; }
    [field: SerializeField] public Collider Collider { get; private set; }
    [field: SerializeField] public Animator Animator { get; private set; }
    [field: SerializeField] public GameObject TestEmission { get; private set; }
@@ -14,14 +15,17 @@ public class CharacterCore : MonoBehaviour
    private CharacterContainer _characterContainer;
    public Transform CharacterTransform { get; set; }
    
-   
    private float _currentPointSpawnInterval;
    private float _timer;
    private float _normalizedSpeed;
    private Vector3 _rotationDirection;
    private const float ErrorOffset = 0.1f;
+
+   private bool _onAction;
    
    private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
+   private readonly int _failureHash = Animator.StringToHash("Failure");
+   private readonly int _successHash = Animator.StringToHash("Success");
 
    [Inject]
    private void Construct(CharacterContainer characterContainer)
@@ -36,14 +40,27 @@ public class CharacterCore : MonoBehaviour
 
       _currentPointSpawnInterval = 0;
    }
+
+   public void OnFailure()
+   {
+      _onAction = true;
+      Animator.SetTrigger(_failureHash);
+   }
+
+   public void OnSuccess()
+   {
+      _onAction = true;
+      Animator.SetTrigger(_successHash);
+   }
+
+   public void OnAnimationEnd()
+   {
+      _onAction = false;
+   }
    
    private void Update()
    {
-      UpdateRotationDirection();
-      UpdateVelocity();
-      Rotate();
-      
-      UpdateAnimatorMoveSpeed();
+      UpdateMovement();
       
       _timer += Time.deltaTime;
       
@@ -55,6 +72,22 @@ public class CharacterCore : MonoBehaviour
       _timer = 0f;
       _currentPointSpawnInterval = UpdatePointSpawnInterval();
       UpdateNewNavmeshWalkablePoint();
+   }
+
+   private void UpdateMovement()
+   {
+      if (_onAction)
+      {
+         NavMeshSettings.Agent.updatePosition = false;
+         NavMeshSettings.Agent.nextPosition = CharacterTransform.position;
+         return;
+      }
+
+      UpdateRotationDirection();
+      UpdateVelocity();
+      Rotate();
+      UpdateAnimatorMoveSpeed();
+      NavMeshSettings.Agent.updatePosition = true;
    }
    
    private void UpdateAnimatorMoveSpeed()

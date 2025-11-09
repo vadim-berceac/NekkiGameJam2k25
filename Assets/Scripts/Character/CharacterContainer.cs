@@ -22,6 +22,11 @@ public class CharacterContainer : MonoBehaviour
       return _characters.ToList();
    }
 
+   public CharacterCore GetByCollider(Collider col)
+   {
+      return _characters.FirstOrDefault(c => c.Collider == col);
+   }
+
    public void SetMaxCharacterCount(int count)
    {
       _characterCount = count;

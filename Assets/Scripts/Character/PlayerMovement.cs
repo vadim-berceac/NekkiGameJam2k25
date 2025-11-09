@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,26 +11,49 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     private Vector3 _lastPosition;
     private InputAction _moveAction;
+    private InputAction _interactAction;
     private float _normalizedSpeed;
     private float _smoothedSpeed; 
+    private bool _onAction;
+    private const float CheckSphereRadius = 2f;
     private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
+    private readonly int _signHash = Animator.StringToHash("Sign");
+    
+    private CharacterContainer _characterContainer;
+
+    public static Action OnWrongChose;
+    public static Action OnRightChose;
+
+    [Inject]
+    private void Construct(CharacterContainer characterContainer)
+    {
+        _characterContainer = characterContainer;
+    }
 
     private void Start()
     {
         _lastPosition = transform.position;
     }
     
+    public void OnAnimationEnd()
+    {
+        _onAction = false;
+    }
+    
     private void OnEnable()
     {
         _moveAction = PlayerMovementSettings.ActionAsset.FindAction("Move");
+        _interactAction = PlayerMovementSettings.ActionAsset.FindAction("Interact");
         _moveAction.performed += OnMovePerformed;
         _moveAction.canceled += OnMoveCanceled;
+        _interactAction.started += OnInteract;
     }
 
     private void OnDisable()
     {
         _moveAction.performed -= OnMovePerformed;
         _moveAction.canceled -= OnMoveCanceled;
+        _interactAction.performed -= OnInteract;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
@@ -41,8 +66,74 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = Vector2.zero;
     }
 
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (_onAction)
+        {
+            return;
+        }
+        _onAction = true;
+
+        PlayerMovementSettings.Animator.SetTrigger(_signHash);
+
+        CheckSphere();
+    }
+
+    private void CheckSphere()
+    {
+        var sphereCenter = transform.position + transform.forward * 1f;
+        
+        var hits = Physics.OverlapSphere(sphereCenter, CheckSphereRadius);
+
+        Collider nearest = null;
+        var minDist = 10f;
+       
+        var characterLayer = LayerMask.NameToLayer("Character");
+
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject.layer != characterLayer || hit.gameObject == gameObject)
+            {
+                continue;
+            }
+            
+            var dist = Vector3.Distance(transform.position, hit.transform.position);
+            if (dist >= minDist)
+            {
+                continue;
+            }
+            minDist = dist;
+            nearest = hit;
+        }
+
+        if (nearest == null)
+        {
+           return;
+        }
+        
+        var core = _characterContainer.GetByCollider(nearest);
+
+        if (core == _characterContainer.WantedCharacter)
+        {
+            core.OnSuccess();
+            OnRightChose?.Invoke();
+            return;
+        }
+        core.OnFailure();
+        OnWrongChose?.Invoke();
+    }
+
     private void Update()
     {
+        UpdateMovement();
+    }
+
+    private void UpdateMovement()
+    {
+        if (_onAction)
+        {
+            return;
+        }
         UpdateDirection();
         UpdateAnimatorMoveSpeed();
         _lastPosition = transform.position;

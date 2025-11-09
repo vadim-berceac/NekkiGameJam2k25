@@ -13217,6 +13217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4698374676202061082}
   - {fileID: 9091042891941178323}
   - {fileID: 495920}
   - {fileID: 429502}
@@ -13584,6 +13585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01edb2db026d68147a6df539b9057c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterCore
+  <PortraitCameraTransform>k__BackingField: {fileID: 4698374676202061082}
   <Collider>k__BackingField: {fileID: 3869200042016569782}
   <Animator>k__BackingField: {fileID: 9562372}
   <TestEmission>k__BackingField: {fileID: 4197926802954799445}
@@ -20162,6 +20164,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.08504334, y: -0.031687796, z: 0.00000014901161}
     m_Extent: {x: 0.5344156, y: 0.33909798, z: 0.7707151}
   m_DirtyAABB: 0
+--- !u!1 &6897588812818824908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4698374676202061082}
+  m_Layer: 10
+  m_Name: PortraitCameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4698374676202061082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897588812818824908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 498442}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6978891414479344599
 GameObject:
   m_ObjectHideFlags: 0
