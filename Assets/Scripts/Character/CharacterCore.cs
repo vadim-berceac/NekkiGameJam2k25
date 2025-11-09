@@ -79,6 +79,7 @@ public class CharacterCore : MonoBehaviour
       if (_onAction)
       {
          NavMeshSettings.Agent.updatePosition = false;
+         NavMeshSettings.Agent.updateRotation = false;
          NavMeshSettings.Agent.nextPosition = CharacterTransform.position;
          return;
       }
@@ -88,6 +89,7 @@ public class CharacterCore : MonoBehaviour
       Rotate();
       UpdateAnimatorMoveSpeed();
       NavMeshSettings.Agent.updatePosition = true;
+      NavMeshSettings.Agent.updateRotation = true;
    }
    
    private void UpdateAnimatorMoveSpeed()

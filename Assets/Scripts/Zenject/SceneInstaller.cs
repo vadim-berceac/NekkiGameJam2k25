@@ -7,6 +7,7 @@ public class SceneInstaller : MonoInstaller
     [SerializeField] private GameObject characterContainer;
     [SerializeField] private GameObject characterSpawner;
     [SerializeField] private GameObject sceneCamera;
+    [SerializeField] private GameObject photoCamera;
     public override void InstallBindings()
     {
         Container.Bind<InterfaceBase>().FromComponentInNewPrefab(interfacePrefab).AsSingle().NonLazy();
@@ -14,5 +15,6 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<CharacterSpawner>().FromComponentInNewPrefab(characterSpawner).AsSingle().NonLazy();
         Container.Bind<SceneCamera>().FromComponentInNewPrefab(sceneCamera).AsSingle().NonLazy();
         Container.Bind<PlayerMovement>().FromComponentInHierarchy().AsSingle().NonLazy();
+        Container.Bind<CharacterPhotoURP>().FromComponentInNewPrefab(photoCamera).AsSingle().NonLazy();
     }
 }

@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class InterfaceBase : MonoBehaviour
 {
+    [field: SerializeField] public Image Photo  { get; private set; }
     private CharacterContainer _characterContainer;
     private CharacterSpawner _characterSpawner;
 
