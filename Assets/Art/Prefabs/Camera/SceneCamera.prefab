@@ -225,7 +225,7 @@ MonoBehaviour:
     <TopClamp>k__BackingField: 25
     <BottomClamp>k__BackingField: 5
     <CameraAngleOverride>k__BackingField: 0
-    <RotationSpeed>k__BackingField: 0.25
+    <RotationSpeed>k__BackingField: 0.15
   <VirtualCamera>k__BackingField: {fileID: 7169850864369179822}
 --- !u!114 &5363491245970135433
 MonoBehaviour:
